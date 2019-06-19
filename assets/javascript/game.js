@@ -75,7 +75,7 @@ $(document).ready(function() {
             blankSpace.innerHTML = "";
             for(var i = 0; i < choiceArray.length; i++){
                 if(keyPress == choiceArray[i]){
-                    blanksArray[i] = keyPress + " ";
+                    blanksArray[i] = keyPress.toUpperCase() + " ";
                     blankSpace.innerHTML += blanksArray[i];
                 }
                 else{
