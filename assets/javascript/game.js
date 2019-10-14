@@ -3,7 +3,40 @@
 $(document).ready(function() {
 
     //array for possible hangman word choices
-    var wordChoices = ["longword", "shortword"];
+    var wordChoices = ["bumfuzzle", 
+    "cattywampus", 
+    "gardyloo",
+    "taradiddle",
+    "snickersnee",
+    "widdershins",
+    "collywobbles",
+    "gubbins",
+    "abibliophobia",
+    "bumbershoot",
+    "lollygag",
+    "flibbertigibbet",
+    "malarkey",
+    "pandiculation",
+    "sialoquent",
+    "wabbit",
+    "snollygoster",
+    "erinaceous",
+    "bibble",
+    "impignorate",
+    "nudiustertian",
+    "quire",
+    "ratoon",
+    "yarborough",
+    "xertz",
+    "zoanthropy",
+    "pauciloquent",
+    "bloviate",
+    "borborygm",
+    "brouhaha",
+    "absquatulate",
+    "comeuppance",
+    "donnybrook",
+    "nincompoop"];
 
     //random word chosen to play
     var chosenWord;
@@ -29,6 +62,19 @@ $(document).ready(function() {
     //variable to store key guess
     var keyPress;
 
+    //register space to deliver blanks and letters
+    var winCounter = document.getElementById("winCounter");
+
+    //starting winCount
+    var winCount = 0;
+
+    //register space to deliver blanks and letters
+    var guessCounter = document.getElementById("guessCounter");
+
+    //starting guessCount
+    var guessCount = 7;
+
+
     
     function setup(){
         //choose a word
@@ -40,8 +86,14 @@ $(document).ready(function() {
         console.log("chosen word split: " + choiceArray);
 
         //store char array size
-        charCount = choiceArray.length;        
+        charCount = choiceArray.length;
+        guessCount = 7;
+        winCounter.innerHTML = "Wins: " + winCount;
+        guessCounter.innerHTML = "Guesses Left: " + guessCount;
 
+        //clear blank spaces
+        blanksArray = [];
+        blankSpace.innerHTML = "";
         //iterate through chosen word and build blanks + empty space for player char visibility
         for(var i = 0; i < choiceArray.length; i++)
         {
@@ -73,18 +125,34 @@ $(document).ready(function() {
         //check keyPress against choiceArray and change blanksArray[i] to letter if correct, rewrite word display
         function play(){
             blankSpace.innerHTML = "";
+            var gotit = false;
             for(var i = 0; i < choiceArray.length; i++){
                 if(keyPress == choiceArray[i]){
                     blanksArray[i] = keyPress.toUpperCase() + " ";
                     blankSpace.innerHTML += blanksArray[i];
+                    gotit = true;
                 }
                 else{
                     blankSpace.innerHTML += blanksArray[i];
-                }
+                }                
+            }
+            if(!gotit) {
+                guessCount--;
+                guessCounter.innerHTML = "Guesses Left: " + guessCount;
                 
+                if(guessCount <= 0){
+                    setup();
+                }
             }
         }
-        play();        
+        if(checkWin()){
+            winCount++;
+            winCounter.innerHTML = "Wins: " + winCount;
+            setup();
+        }
+        else{
+            play();
+        }
     }
 
 
@@ -94,10 +162,15 @@ $(document).ready(function() {
         return (Math.ceil( Math.random() * 10) + 10);
     }
 
-
-
-    
-
+    function checkWin() {
+        if (blankSpace.innerHTML.indexOf('_') > -1)
+        {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 
 setup();
 //game.js end    

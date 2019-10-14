@@ -5,14 +5,27 @@
         <title>Mega awesome word game title too long for any tab!</title>
         <link rel= "stylesheet" type= "text/css" href="./assets/css/style.css" />
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
         <script src="./assets/javascript/game.js"></script>
     </head>
     <body>
-        <container id="gameContainer">
-            <div id="wordContainer">
-
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Obscure Word Hangman</a>
+        </nav>
+        <div class="row mt-5 mx-auto">
+            <div class="h-25 col-md-6 offset-md-3 text-center">
+                <container id="gameContainer" class="whatever">
+                    <div class="card">
+                        <h3 class="card-title">Choose a letter!</h3>
+                        <div class="card-body" id="wordContainer">
+                        </div>
+                    </div>
+                </container>
             </div>
-
-        </container>
+        </div>
+        <div class="row mt-5 mx-auto">
+            <div class="h-25 col-md-6 text-center" id="winCounter"></div>
+            <div class="h-25 col-md-6 text-center" id="guessCounter"></div>
+        </div>     
     </body>
 </html>
